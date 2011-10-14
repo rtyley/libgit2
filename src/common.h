@@ -59,6 +59,19 @@ extern void git___rethrow(const char *, ...) GIT_FORMAT_PRINTF(1, 2);
 #define git__rethrow(error, ...) \
 	(git___rethrow(__VA_ARGS__), error)
 
+
+/*
+ * New error handling
+ */
+git_error *git_error__new(const char *file, int line_no, git_error *child, const char *message, ...)
+	GIT_FORMAT_PRINTF(4, 5);
+
+/* Throw a new generic error */
+#define git_error_new(child, message, ...) git_error__new(__FILE__, __LINE__, child, message, __VA_ARGS__)
+
+/* Throw an Out-of-memory error */
+extern git_error *git_error_oom(void);
+
 #include "util.h"
 
 #endif /* INCLUDE_common_h__ */

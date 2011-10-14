@@ -74,6 +74,13 @@ typedef enum {
 	GIT_OBJ_REF_DELTA = 7, /**< A delta, base is given by object id. */
 } git_otype;
 
+typedef struct git_error {
+	struct git_error *next;
+	char *msg;
+	const char *filename;
+	int line_no;
+} git_error;
+
 /** An open object database handle. */
 typedef struct git_odb git_odb;
 
